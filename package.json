@@ -1,0 +1,11 @@
+{
+  "name": "reonic-takehome",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "task1": "yarn workspace task1 simulation"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

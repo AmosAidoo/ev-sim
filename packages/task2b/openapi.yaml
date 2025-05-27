@@ -1,0 +1,489 @@
+openapi: 3.1.0
+x-stoplight:
+  id: 8vycbr6hoel4c
+info:
+  title: EV Simulation API
+  version: '1.0'
+  summary: API for Reonic backend take home
+  description: API to create input parameters and run simulations based on them.
+  contact:
+    name: ''
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/parameters/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Input Parameters Id
+    get:
+      summary: Get Input Parameters by ID
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    x-stoplight:
+                      id: 9rezs6wn47hzp
+                  message:
+                    type: string
+                    x-stoplight:
+                      id: yrpet8j6cbfc8
+                  data:
+                    $ref: '#/components/schemas/InputParametersWithSimulationResultsResponse'
+                    x-stoplight:
+                      id: n9ulgv7d4db0d
+              examples: {}
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    x-stoplight:
+                      id: da7bseh6u7ju6
+                  message:
+                    type: string
+                    x-stoplight:
+                      id: nwjk3vz2brqes
+              examples:
+                Example 1:
+                  value:
+                    code: 404
+                    message: 'could not find input parameter with id: 79ccd886-8b26-4ad1-9c20-7d78b4eb7706'
+      operationId: get-parameters-id
+      description: Retrieve the input parameters matching the id.
+      x-stoplight:
+        id: h8m9tvv8plkaz
+    patch:
+      summary: Update Input Parameters
+      operationId: patch-parameters-id
+      responses:
+        '200':
+          description: OK
+          content: {}
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    x-stoplight:
+                      id: alg5e9gav28ll
+                  message:
+                    type: string
+                    x-stoplight:
+                      id: z34naatx6av0q
+              examples:
+                Example 1:
+                  value:
+                    code: 404
+                    message: 'could not find input parameter with id: 3a84ffdf-5573-4537-8a52-aa3e4813a230'
+      description: Update input parameters.
+      requestBody:
+        $ref: '#/components/requestBodies/InputParametersUpdateRequest'
+      x-stoplight:
+        id: zmg3i2ygrpt1o
+    delete:
+      summary: Delete Input Parameters
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  message:
+                    type: string
+                x-examples:
+                  Example 1:
+                    code: 200
+                    message: input parameter deleted successfully
+              examples:
+                Example 1:
+                  value:
+                    code: 200
+                    message: input parameter deleted successfully
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  message:
+                    type: string
+                x-examples:
+                  Example 1:
+                    code: 404
+                    message: 'parameters with id: 3a84ffdf-5573-4537-8a52-aa3e4813a230 does not exist'
+              examples:
+                Example 1:
+                  value:
+                    code: 404
+                    message: 'parameters with id: 3a84ffdf-5573-4537-8a52-aa3e4813a230 does not exist'
+      operationId: delete-parameters-id
+      x-stoplight:
+        id: rlxofxbvupxlf
+      description: Delete input parameters
+  /parameters:
+    post:
+      summary: Create New Input Parameters
+      operationId: post-parameters
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    x-stoplight:
+                      id: khgp5d7cwqw3x
+                  message:
+                    type: string
+                    x-stoplight:
+                      id: 6b4j0pbj7dvjx
+              examples:
+                Example 1:
+                  value:
+                    code: 201
+                    message: input parameters created successfully
+      requestBody:
+        $ref: '#/components/requestBodies/InputParametersRequest'
+      description: Create a new set of input parameters.
+      x-stoplight:
+        id: q44p2h64605d2
+    parameters: []
+    get:
+      summary: Get All Parameters
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    x-stoplight:
+                      id: q1bwhrp1mo9ka
+                  message:
+                    type: string
+                    x-stoplight:
+                      id: ge0x4siarygp3
+                  '':
+                    type: array
+                    x-stoplight:
+                      id: lposlyge4ib7z
+                    items:
+                      $ref: '#/components/schemas/InputParametersResponse'
+                      x-stoplight:
+                        id: 9hgys97j6ldm5
+      operationId: get-parameters
+      x-stoplight:
+        id: 48avn7yvrmxku
+      description: Get all sets of input parameters
+  /simulation:
+    post:
+      summary: Run Simulation
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    code: 200
+                    message: success
+                    data:
+                      totalEnergyConsumed: 154079.7
+                      actualMaximumPowerDemand: 107.8
+                      concurrencyFactor: 49.00000000000001
+                      theoreticalMaximumPowerDemand: 220
+                properties:
+                  code:
+                    type: integer
+                  message:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/SimulationResponse'
+                    x-stoplight:
+                      id: da96pxgzktags
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  message:
+                    type: string
+                x-examples:
+                  Example 1:
+                    code: 404
+                    message: 'parameter with id: b506fc5e-acfa-4edd-92fc-243113a95def not found'
+              examples:
+                Example 1:
+                  value:
+                    code: 404
+                    message: 'parameter with id: b506fc5e-acfa-4edd-92fc-243113a95def not found'
+      operationId: post-simulation
+      x-stoplight:
+        id: tw9yyaif51zbr
+      description: Runs simulation for a specific input set
+      requestBody:
+        $ref: '#/components/requestBodies/SimulationRequest'
+components:
+  schemas:
+    SimulationResponse:
+      type: object
+      x-examples:
+        Example 1:
+          totalEnergyConsumed: 154079.7
+          actualMaximumPowerDemand: 107.8
+          concurrencyFactor: 49.00000000000001
+          theoreticalMaximumPowerDemand: 220
+      required:
+        - totalEnergyConsumed
+        - actualMaximumPowerDemand
+        - concurrencyFactor
+        - theoreticalMaximumPowerDemand
+      properties:
+        totalEnergyConsumed:
+          type: number
+          description: Total energy consumed in kWh
+        actualMaximumPowerDemand:
+          type: number
+          description: Maximum of the sum of all active charge points power at a specified interval. The unit is kW
+        concurrencyFactor:
+          type: number
+          description: The ratio of actual maximum power demand to theoretical maximum power demand.
+        theoreticalMaximumPowerDemand:
+          type: integer
+          description: Theoretical maximum power demand. The unit is kW.
+      description: Results after running a simulation
+      examples:
+        - totalEnergyConsumed: 0
+          actualMaximumPowerDemand: 0
+          concurrencyFactor: 0
+          theoreticalMaximumPowerDemand: 0
+    SimulationRequest:
+      type: object
+      x-stoplight:
+        id: 10923bde5cd46
+      x-examples:
+        Example 1:
+          id: 3a84ffdf-5573-4537-8a52-aa3e4813a230
+          seed: 1234567890
+          interval: 15
+          totalRuns: 10
+          timezone: Europe/Berlin
+      properties:
+        inputParametersId:
+          type: string
+          x-stoplight:
+            id: ag7wsnavt8jbn
+          description: Input parameters id
+        seed:
+          type: integer
+          description: Seed for random number generator. Defaults to 1337.
+        interval:
+          type: integer
+          description: Intervals in minutes to aggregate results. Should be a divisor of 60. Defaults to 15.
+        totalRuns:
+          type: integer
+          description: Number of times to run the 1 year simulation. The results is an average of results of each run. Defaults to 10.
+        timezone:
+          type: string
+          description: Timezone to base the simulation on. Defaults to "UTC".
+    InputParametersResponse:
+      type: object
+      x-examples:
+        Example 1:
+          id: 3a84ffdf-5573-4537-8a52-aa3e4813a230
+          chargePointSpeed: 11
+          consumptionOfCar: 18
+          numberOfChargePoints: 20
+      required:
+        - id
+        - chargePointSpeed
+        - consumptionOfCar
+        - numberOfChargePoints
+      properties:
+        id:
+          type: string
+        chargePointSpeed:
+          type: integer
+        consumptionOfCar:
+          type: integer
+        numberOfChargePoints:
+          type: integer
+      description: Input parameters stored in database
+      examples:
+        - id: 3a84ffdf-5573-4537-8a52-aa3e4813a230
+          chargePointSpeed: 11
+          consumptionOfCar: 18
+          numberOfChargePoints: 20
+    InputParametersWithSimulationResultsResponse:
+      type: object
+      x-examples:
+        Example 1:
+          id: ''
+          chargePointSpeed: 0
+          consumptionOfCar: 0
+          numberOfChargePoints: 0
+          simulationResults:
+            - simulationOptions: {}
+              output: {}
+      properties:
+        id:
+          type: string
+        chargePointSpeed:
+          type: integer
+        consumptionOfCar:
+          type: integer
+        numberOfChargePoints:
+          type: integer
+        simulationResults:
+          type: array
+          items:
+            type: object
+            properties:
+              simulationOptions:
+                type: object
+              output:
+                $ref: '#/components/schemas/SimulationResponse'
+  requestBodies:
+    SimulationRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            x-examples:
+              Example 1:
+                inputParametersId: 3a84ffdf-5573-4537-8a52-aa3e4813a230
+                seed: 1234567890
+                interval: 15
+                totalRuns: 10
+            required:
+              - inputParametersId
+            properties:
+              inputParametersId:
+                type: string
+                description: Id of input parameters
+              seed:
+                type: integer
+                description: Seed for random number generator. Defaults to 1337.
+              interval:
+                type: integer
+                description: |-
+                  Number of times to run the 1 year simulation. The results is an average.
+                  Defaults to 10.
+              totalRuns:
+                type: integer
+                description: Number of iterations
+              timezone:
+                type: string
+                x-stoplight:
+                  id: 9ynuyj5lelke6
+                description: Timezone to base the simulation on. Defaults to "UTC".
+          examples:
+            Example 1:
+              value:
+                inputParametersId: 3a84ffdf-5573-4537-8a52-aa3e4813a230
+                seed: 1234567890
+                interval: 15
+                totalRuns: 10
+                timezone: Europe/Berlin
+      description: Options to pass when running a simulation
+    InputParametersRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            x-examples:
+              Example 1:
+                chargePointSpeed: 11
+                consumptionOfCar: 18
+                numberOfChargePoints: 20
+                arrivalProbabilityMultiplier: 100
+            required:
+              - numberOfChargePoints
+            properties:
+              chargePointSpeed:
+                type: integer
+                description: Maximum charge speed of each charge point in kW. Defaults to 11kW.
+              consumptionOfCar:
+                type: integer
+                description: Power consumption of a standard electric vehicle per 100kms in kWh. Defaults to 18kWh.
+              numberOfChargePoints:
+                type: integer
+                description: Number of charge points in a parking lot.
+              arrivalProbabilityMultiplier:
+                type: integer
+                description: A multiplier for the arrival probability to increase the amount of cars arriving to charge. Defaults to 100%.
+          examples:
+            Example 1:
+              value:
+                chargePointSpeed: 11
+                consumptionOfCar: 18
+                numberOfChargePoints: 20
+                arrivalProbabilityMultiplier: 100
+      description: Set of input parameters to create
+    InputParametersUpdateRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            x-examples:
+              Example 1:
+                chargePointSpeed: 11
+                consumptionOfCar: 25
+                numberOfChargePoints: 20
+                arrivalProbabilityMultiplier: 150
+            properties:
+              chargePointSpeed:
+                type: integer
+                description: Maximum charge speed of each charge point in kW.
+              consumptionOfCar:
+                type: integer
+                description: Power consumption of a standard electric vehicle per 100kms in kWh.
+              numberOfChargePoints:
+                type: integer
+                description: Number of charge points in a parking lot.
+              arrivalProbabilityMultiplier:
+                type: integer
+                description: A multiplier for the arrival probability to increase the amount of cars arriving to charge.
+      description: Update to set of input parameters. All fields are optional.
+  responses: {}
