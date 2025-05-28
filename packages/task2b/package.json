@@ -7,7 +7,7 @@
     "dev": "yarn build && node --unhandled-rejections=strict ./dist/index.js",
     "start:deploy": "prisma migrate deploy && node --unhandled-rejections=strict ./dist/index.js",
     "clean": "rimraf dist/",
-    "copy-files": "copyfiles -u 1 generated/prisma/* dist/",
+    "copy-files": "copyfiles -u 1 generated/prisma/* dist/ && copyfiles openapi.yaml dist/",
     "build": "yarn clean && yarn workspace simulation-lib build && tsc && yarn copy-files"
   },
   "keywords": [],
@@ -17,6 +17,8 @@
     "@types/express": "^5.0.2",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.15.21",
+    "@types/swagger-ui-express": "^4.1.8",
+    "@types/yamljs": "^0.2.34",
     "copyfiles": "^2.4.1",
     "prisma": "^6.8.2",
     "rimraf": "^6.0.1",
@@ -29,6 +31,8 @@
     "express": "^5.1.0",
     "joi": "^17.13.3",
     "morgan": "^1.10.0",
-    "simulation-lib": "1.0.0"
+    "simulation-lib": "1.0.0",
+    "swagger-ui-express": "^5.0.1",
+    "yamljs": "^0.3.0"
   }
 }
