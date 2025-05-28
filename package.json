@@ -3,7 +3,8 @@
   "private": true,
   "workspaces": ["packages/*"],
   "scripts": {
-    "task1": "yarn workspace task1 simulation"
+    "task1": "yarn workspace task1 simulation",
+    "task2": "yarn workspace task2 dev"
   },
   "devDependencies": {
     "typescript": "^5.8.3"
