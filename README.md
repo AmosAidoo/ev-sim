@@ -1,4 +1,4 @@
-# Reonic Take Home
+# EV Charging Simulation Take Home
 
 Given a parking lot, a set of charge point for electric vehicles (EVs), hourly probability distributions for EVs arriving and how much energy they would require, this project simulates charging scenarios for 1 year to determing key metrics like energy consumption and peak power loads.
 
