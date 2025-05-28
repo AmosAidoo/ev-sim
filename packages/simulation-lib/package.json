@@ -15,11 +15,13 @@
   },
   "scripts": {
     "build": "tsup",
-    "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm"
+    "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
+    "tsdoc": "tsdoc --src=./*, --dest=./dist/README.md --noemoji"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.1",
     "@types/luxon": "^3.6.2",
+    "tsdoc-markdown": "^1.2.0",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3"
   },
