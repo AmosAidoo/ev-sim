@@ -216,4 +216,16 @@ export class ParkingLot {
       .map(chargePoint => chargePoint.maxChargeSpeed)
       .reduce((acc, curr) => acc + curr, 0)
   }
+
+  /**
+   * Returns an array containing objects with maxChargeSpeed and totalEnergyConsumed
+   * for each charge point.
+   * @returns Array of objects with maxChargeSpeed and totalEnergyConsumed
+   */
+  energyPerChargePoint(): { maxChargeSpeed: number, totalEnergyConsumed: number }[] {
+    return this._chargePoints.map(chargePoint => ({
+      maxChargeSpeed: chargePoint.maxChargeSpeed,
+      totalEnergyConsumed: chargePoint.totalEnergyConsumed
+    }))
+  }
 }

@@ -4,6 +4,11 @@ import XORShiftGenerator from "./xor-shift-generator"
 import { DateTime, Duration } from "luxon"
 
 /**
+ * Represents max charge speed of a charge point and the total energy it consumed
+ */
+type EnergyPerChargePointType = { totalEnergyConsumed: number, maxChargeSpeed: number }
+
+/**
  * Results after running a simulation
  */
 export interface SimulationResult {
@@ -27,6 +32,11 @@ export interface SimulationResult {
    * The ratio of actual maximum power demand to theoretical maximum power demand.
    */
   concurrencyFactor: number
+
+  /**
+   * Energy per charge point for the whole year
+   */
+  energyPerChargePoint?: EnergyPerChargePointType[]
 }
 
 /**
@@ -134,6 +144,11 @@ export class Simulator {
     let concurrencyFactorSum = 0
     const theoreticalMaximumPowerDemand = numberOfChargePoints * chargePointChargeSpeed
 
+    const energyPerChargePointAggregate: EnergyPerChargePointType[] = Array.from({ length: numberOfChargePoints }, () => ({
+      totalEnergyConsumed: 0,
+      maxChargeSpeed: 0
+    }))
+
     // Runs the simulation `totalRuns` times
     for (let run = 0; run < totalRuns; run++) {
       let actualMaximumPowerDemand = -1
@@ -161,6 +176,13 @@ export class Simulator {
         actualMaximumPowerDemand = Math.max(actualMaximumPowerDemand, powerDemand)
       }
 
+      const energyPerChargePoint = parkingLot.energyPerChargePoint()
+
+      energyPerChargePoint.forEach((detail, index) => {
+        (energyPerChargePointAggregate[index] as EnergyPerChargePointType).totalEnergyConsumed += detail.totalEnergyConsumed;
+        (energyPerChargePointAggregate[index] as EnergyPerChargePointType).maxChargeSpeed += detail.maxChargeSpeed;
+      })
+
       const concurrencyFactor = actualMaximumPowerDemand / theoreticalMaximumPowerDemand
 
       totalEnergyConsumedSum += parkingLot.totalEnergyConsumed()
@@ -168,12 +190,18 @@ export class Simulator {
       concurrencyFactorSum += concurrencyFactor
     }
 
+    const energyPerChargePoint = energyPerChargePointAggregate.map(total => ({
+      totalEnergyConsumed: total.totalEnergyConsumed / totalRuns,
+      maxChargeSpeed: total.maxChargeSpeed / totalRuns
+    }))
+
     // `totalRuns` results are averaged here
     const simulationResult: SimulationResult = {
       totalEnergyConsumed: totalEnergyConsumedSum / totalRuns,
       actualMaximumPowerDemand: actualMaximumPowerDemandSum / totalRuns,
       concurrencyFactor: (concurrencyFactorSum / totalRuns) * 100,
-      theoreticalMaximumPowerDemand
+      theoreticalMaximumPowerDemand,
+      energyPerChargePoint
     }
 
     return simulationResult
