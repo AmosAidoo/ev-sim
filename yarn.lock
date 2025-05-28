@@ -1962,6 +1962,11 @@ ts-interface-checker@^0.1.9:
   resolved "https://registry.yarnpkg.com/ts-interface-checker/-/ts-interface-checker-0.1.13.tgz#784fd3d679722bc103b1b4b8030bcddb5db2a699"
   integrity sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==
 
+tsdoc-markdown@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/tsdoc-markdown/-/tsdoc-markdown-1.2.0.tgz#46d106502d16af08b512abd5457c153ed305c9ed"
+  integrity sha512-EqOtzSzWMKyDXJFuiCBCkAulpspb9goZ+IsqrQeDwlGDmetU4PhEQIXPDQdIGaeMnty0lBa5xaht8nOdL16HEg==
+
 tsup@^8.5.0:
   version "8.5.0"
   resolved "https://registry.yarnpkg.com/tsup/-/tsup-8.5.0.tgz#4b1e25b1a8f4e4f89b764207bf37cfe2d7411d31"
