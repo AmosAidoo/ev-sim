@@ -47,7 +47,7 @@ There are two places these need to be set. One in the root of the project and th
 ### Task 1
 In the root of the project, execute the following command:
 ```
-yarn simulation
+yarn task1
 ```
 
 ### Task 2
@@ -60,7 +60,8 @@ Visit `http://localhost:{PORT}/api-docs` in your browser to view the API docs.
 
 ## Bonus Questions in Task 1
 
-1. When the simulation is run for chargepoints between 1 and 30, I noticed a general downward trend in the concurrency factor. Given the formular for concurrency factor, `actual_max_energy/theoretical_max_energy`, it makes sense. Smaller chargepoints mean that both values are very close. More chargepoints make `actual_max_energy` smaller, hence, reducing the overall value.
+1. When the simulation is run for chargepoints between 1 and 30, I noticed a general downward trend in the concurrency factor. Given the formular for concurrency factor, `actual_max_energy/theoretical_max_energy`, it makes sense. Smaller chargepoints mean that both values are very close. More chargepoints make `actual_max_energy` smaller, hence, reducing the overall value. A sample chart is below (Generated with Google Sheets):
+![Charge Points vs Concurrency Factor](/bonus1.png "Charge Points vs Concurrency Factor")
 2. I implemented the simulation library to support different timezones based on [luxon](https://moment.github.io/luxon/#/). Once you pass the timezone to the simulator, DST for that timezone will be applied.
 3. I implemented the Xorshift pseudorandom number generator based on the [Wikipedia](https://en.m.wikipedia.org/wiki/Xorshift) example implementation. This allows us to pass in a seed for random-but-deterministic results.
 
