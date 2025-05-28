@@ -40,7 +40,7 @@ export interface SimulatorConfig {
 
   /**
    * Number of times to run the 1 year simulation. The results is an average
-   * of results of each run. Defaults to 10.
+   * of results of each run. Defaults to 1.
    */
   totalRuns?: number
 
@@ -119,7 +119,7 @@ export class Simulator {
    */
   run(parameters: SimulationParameters): SimulationResult {
     const interval = this._options.interval ?? 15
-    const totalRuns = this._options.totalRuns ?? 10
+    const totalRuns = this._options.totalRuns || 1
     const timezone = this._options.timezone ?? "UTC"
 
     const numberOfChargePoints = parameters.numberOfChargePoints
