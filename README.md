@@ -51,12 +51,12 @@ yarn task1
 ```
 
 ### Task 2
-After you have set the environment variables as mentioned above, execute the following command in the root to spin up a docker container.
+Execute the following command in the root to spin up a docker container.
 ```
 docker compose up --build -d
 ```
 
-Visit `http://localhost:{PORT}/api-docs` in your browser to view the API docs.
+Visit `http://localhost:3000/api-docs` in your browser to view the API docs.
 
 ## Bonus Questions in Task 1
 
