@@ -41,9 +41,6 @@ cd ev-sim
 yarn install
 ```
 
-### Environment Variables
-There are two places these need to be set. One in the root of the project and the second in the backend at `./packages/task2b`. Each places have a `.env.example` that you can duplicate.
-
 ### Task 1
 In the root of the project, execute the following command:
 ```
